@@ -1,25 +1,27 @@
 package main;
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.util.ArrayList;
 
 public class Grid_Board {
 	
 	private String [][]  Board = null;
-	private int row_num = 16;
-	private int col_num = 6;
+	private int row_num = 0;
+	private int col_num = 0;
+	private String file_path;
 	
-	private Grid_Board() {
+	public Grid_Board(String file_path, int row, int col) {
+		row_num = row;
+		col_num = col;
+		this.file_path = file_path;
 		ReadGrid();
-		
 	}
 	
-	private void ReadGrid() {
+	public void ReadGrid() {
 		
 		this.Board = new String[row_num][col_num];
 		
         try { 
-            BufferedReader reader = new BufferedReader(new FileReader("src/main/gridA1.csv"));
+            BufferedReader reader = new BufferedReader(new FileReader(this.file_path));
             
             String line = null; 
             int count_row = 0;
@@ -31,6 +33,8 @@ public class Grid_Board {
                 }
                 count_row ++;
             }
+            System.out.println("load finish");
+            reader.close();
         } catch (Exception e) { 
             e.printStackTrace(); 
         } 
@@ -41,19 +45,32 @@ public class Grid_Board {
 		return this.Board[i][j];
 	}
 	
+	public void setColNum(int col) {
+		this.col_num = col;
+	}
+	
+	public void setRowNum(int row) {
+		this.row_num = row;
+	}	
+	
 	public int getColNum() {
-		return this.col_num;
+		return col_num;
 	}
 	
 	public int getRowNum() {
-		return this.row_num;
+		return row_num;
+	}
+	
+	public void setItem(int i, int j, double val) {
+		this.Board[i][j] = Double.toString(val);
 	}
 
-	/*
+	
 	public static void main(String[] args) {
-		Grid_Board board = new Grid_Board();
+		Grid_Board board = new Grid_Board("src/main/gridA1.csv", 16, 6);
 		System.out.println("finish"); 
+		System.out.println(board.getColNum());
 	}
-	*/
+	
 
 }
