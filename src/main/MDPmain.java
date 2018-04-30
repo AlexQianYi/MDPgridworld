@@ -113,7 +113,22 @@ public class MDPmain {
 		System.out.println("left");
 		Q_W=cal_Qval(X_W,X_E,X_S,X_N);
 
+		int direction_temp;
+		double temp_max;
+		
+		if(Q_N >= Q_E && Q_N >= Q_S && Q_N >= Q_W) {
+			direction_temp = 1;
+		}else if(Q_E >= Q_N && Q_E >= Q_S && Q_E >= Q_W) {
+			direction_temp = 2;
+		}else if(Q_S >= Q_N && Q_S >= Q_E && Q_S >= Q_W) {
+			direction_temp = 3;
+		}else {
+			direction_temp = 4;
+		}
+
 		Vstar=Math.max(Math.max(Math.max(Q_N, Q_E), Q_S), Q_W);
+		
+		this.direction[i][j] = direction_temp;
 
 	return Double.valueOf(df.format(Vstar));
 	}
@@ -130,6 +145,18 @@ public class MDPmain {
 		
 	}
 	
+	public void printDirection() {
+		
+		for(int i=0; i<this.row_num; i++) {
+			for(int j=0; j<this.col_num; j++) {
+				System.out.print(this.direction[i][j]);
+				System.out.print(" ");
+			}
+			System.out.println(" ");
+		}
+		
+	}
+	
 	public static void main(String[] args) {
 		
 		MDPmain mdp = new MDPmain();
@@ -137,6 +164,8 @@ public class MDPmain {
 		for(int i=0; i<20; i++) {
 			mdp.MDPiter();
 		}
+		
+		mdp.printDirection();
 		
 	}
 	
