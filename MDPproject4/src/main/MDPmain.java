@@ -17,11 +17,16 @@ public class MDPmain {
 		this.col_num = board.getCol();
 		this.row_num = board.getRow();
 		
+	}
+	
+	public void MDPiter() {
 		for(int i=0; i<this.row_num; i++) {
 			for(int j=0; j<this.col_num; j++) {
 				this.board.setItem(i, j) = Cal_Val(i, j);
 			}
 		}
+		
+		printBoard();
 	}
 	
 	private Double cal_Qval(Double X_N,Double X_S,Double X_W, Double X_E)
@@ -50,6 +55,9 @@ public class MDPmain {
 		Double Q_S;
 		Double Q_W;
 		Double Q_E;
+		
+		java.text.DecimalFormat df = new java.text.DecimalFormat("#.0000");
+		
 
 		//value of North position value
 		if(i<=0 || this.Board.getItem(i-1, j)=="-")
@@ -105,12 +113,25 @@ public class MDPmain {
 
 		Vstar=max(max(max(Q_N, Q_E), Q_S), Q_W);
 
-	return Vstar;
+	return df.format(Vstar);
 	}
 	
-	
+	public void printBoard() {
+		
+		for(int i=0; i<this.row_num; i++) {
+			for(int j=0; j<this.col_num; j++) {
+				System.out.print(this.board.getItem(i, j));
+				System.out.print(" ");
+			}
+			System.out.println(" ");
+		}
+		
+	}
 	
 	public static void main(String[] args) {
+		
+		MDPmain mdp = new MDPmain();
+		mdp.mdp
 		
 	}
 	
