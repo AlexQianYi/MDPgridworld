@@ -36,6 +36,18 @@ public class Grid_Board {
         } 
 
 	}
+	
+	public String getItem(int i, int j) {
+		return this.Board[i][j];
+	}
+	
+	public int getColNum() {
+		return this.col_num;
+	}
+	
+	public int getRowNum() {
+		return this.row_num;
+	}
 
 	/*
 	public static void main(String[] args) {
