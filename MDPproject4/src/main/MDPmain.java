@@ -16,6 +16,12 @@ public class MDPmain {
 		this.board = new Grid_board();
 		this.col_num = board.getCol();
 		this.row_num = board.getRow();
+		
+		for(int i=0; i<this.row_num; i++) {
+			for(int j=0; j<this.col_num; j++) {
+				this.board.setItem(i, j) = Cal_Val(i, j);
+			}
+		}
 	}
 	
 	private Double cal_Qval(Double X_N,Double X_S,Double X_W, Double X_E)
@@ -33,75 +39,76 @@ public class MDPmain {
 		return Q
 	}
 
-	private Double Cal_Vval(Double [][]Board)
+	private Double Cal_Vval(int i, int j)
 	{	
-		Double X;
+		Double Vstar;
 		Double X_N;
 		Double X_S;
 		Double X_W;
 		Double X_E;
-		Double V_N;
-		Double V_S;
-		Double V_W;
-		Double V_E;
+		Double Q_N;
+		Double Q_S;
+		Double Q_W;
+		Double Q_E;
 
 		//value of North position value
-		if(i<=0 || Board[i-1][j]=="-")
+		if(i<=0 || this.Board.getItem(i-1, j)=="-")
 		{
-			X_N=Double.parseDouble(Board[i][j]);
+			X_N=Double.parseDouble(this.Board.getItem(i, j));
 
 		}
 		else
 		{
-			X_N=Double.parseDouble(Board[i-1][j]);
+			X_N=Double.parseDouble(this.Board.getItem(i-1, j));
 		}
 
 		
 
 	//value of South position value
-		if(i>=15 || Board[i+1][j]=="-")	
+		if(i>=15 || this.Board.getItem(i+1, j)=="-")	
 		{
-			X_S=Double.parseDouble(Board[i][j]);
+			X_S=Double.parseDouble(this.Board.getItem(i, j));
 		}
 		else
 		{
-			X_S=Double.parseDouble(Board[i+1][j]);
+			X_S=Double.parseDouble(this.Board.getItem(i+1, j));
 
 		}
 
 	// west
-		if(j<=0 || Board[i][j-1]=="-")
+		if(j<=0 || this.Board.getItem(i, j-1)=="-")
 		{
-			X_W=Double.parseDouble(Board[i][j]);
+			X_W=Double.parseDouble(this.Board.getItem(i, j));
 
 		}
 		else
 		{
-			X_W=Double.parseDouble(Board[i][j-1]);
+			X_W=Double.parseDouble(this.Board.getItem(i, j-1));
 		}
 
 	// east
-		if(j>=5 || Board[i][j+1]=="-" )
+		if(j>=5 || this.Board.getItem(i, j+1) =="-" )
 		{
-			X_E=Double.parseDouble(Board[i][j]);
+			X_E=Double.parseDouble(this.Board.getItem(i, j));
 		}
 		else
 		{
-			X_E=Double.parseDouble(Board[i][j+1]);
+			X_E=Double.parseDouble(this.board.getItem(i, j+1));
 
 		}
 
 
-		V_N=cal_Qval(X_N,X_S,X_W,X_E);
-		V_E=cal_Qval(X_E,X_W,X_N,X_S);
-		V_S=cal_Qval(X_S,X_N,X_E,X_W);
-		V_W=cal_Qval(X_W,X_E,X_S,X_N);
+		Q_N=cal_Qval(X_N,X_S,X_W,X_E);
+		Q_E=cal_Qval(X_E,X_W,X_N,X_S);
+		Q_S=cal_Qval(X_S,X_N,X_E,X_W);
+		Q_W=cal_Qval(X_W,X_E,X_S,X_N);
 
-		X=Max(V_N,V_E,V_S,V_W); 
+		Vstar=max(max(max(Q_N, Q_E), Q_S), Q_W);
 
-	retrun X;
-
+	return Vstar;
 	}
+	
+	
 	
 	public static void main(String[] args) {
 		
