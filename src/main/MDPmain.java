@@ -24,7 +24,6 @@ public class MDPmain {
 	}
 	
 	public void MDPiter() {
-		int count = 0;
 		System.out.println("in1");
 		this.stable = true;
 		double temp_result = 0.0;
@@ -36,20 +35,19 @@ public class MDPmain {
 					continue;
 				}else {
 					temp_result = Cal_Vval(i, j);
-					if(Math.abs(Double.parseDouble(this.board.getItem(i, j)) - temp_result) > 0.001) {
+					if(Math.abs(Double.parseDouble(this.board.getItem(i, j)) - temp_result) > this.error) {
 						this.stable = false;
 					}
 					this.board.setItem(i, j, Cal_Vval(i, j));	
 				}
 			}
-			count++;
 		}
 		printBoard();
 	}
 	
 	private Double cal_Qval(Double X_N,Double X_S,Double X_W, Double X_E)
 	{
-		return (reward+discount*X_N)*N_pos+(reward+discount*X_S)*E_pos+(reward+discount*X_W)*W_pos+(reward+discount*X_S)*S_pos;
+		return (reward+discount*X_N)*N_pos+(reward+discount*X_E)*E_pos+(reward+discount*X_W)*W_pos+(reward+discount*X_S)*S_pos;
 	}
 
 	private Double Cal_Vval(int i, int j)
@@ -113,17 +111,12 @@ public class MDPmain {
 
 		}
 
-		System.out.println("up");
 		Q_N=cal_Qval(X_N,X_S,X_W,X_E);
-		System.out.println("right");
 		Q_E=cal_Qval(X_E,X_W,X_N,X_S);
-		System.out.println("down");
 		Q_S=cal_Qval(X_S,X_N,X_E,X_W);
-		System.out.println("left");
 		Q_W=cal_Qval(X_W,X_E,X_S,X_N);
 
 		int direction_temp;
-		double temp_max;
 		
 		if(Q_N >= Q_E && Q_N >= Q_S && Q_N >= Q_W) {
 			direction_temp = 1;
@@ -178,6 +171,7 @@ public class MDPmain {
 		return this.stable;
 	}
 	
+	/*
 	public static void main(String[] args) {
 		
 		MDPmain mdp = new MDPmain();
@@ -188,6 +182,6 @@ public class MDPmain {
 		
 		mdp.printDirection();
 		
-	}
+	}*/
 	
 }
