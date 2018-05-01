@@ -17,7 +17,7 @@ public class MDPmain {
 	private boolean stable = false;
 	private double error = 0.001;
 	
-	private MDPmain() {
+	public MDPmain() {
 		board = new Grid_Board("src/main/gridA1.csv", row_num, col_num);
 		direction = new int[16][6];
 		printBoard();
@@ -140,6 +140,14 @@ public class MDPmain {
 		this.direction[i][j] = direction_temp;
 
 	return Double.valueOf(df.format(Vstar));
+	}
+	
+	public String getBoardItem(int i, int j) {
+		return this.board.getItem(i, j);
+	}
+	
+	public int getDirection(int i, int j) {
+		return this.direction[i][j];
 	}
 	
 	public void printBoard() {
