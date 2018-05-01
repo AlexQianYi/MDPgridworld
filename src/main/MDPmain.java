@@ -14,6 +14,8 @@ public class MDPmain {
 	private String MaxValue = "1000";
 	private String MinValue = "-800";
 	private int[][] direction = null;
+	private boolean stable = false;
+	private double error = 0.001;
 	
 	private MDPmain() {
 		board = new Grid_Board("src/main/gridA1.csv", row_num, col_num);
@@ -24,12 +26,19 @@ public class MDPmain {
 	public void MDPiter() {
 		int count = 0;
 		System.out.println("in1");
+		this.stable = true;
+		double temp_result = 0.0;
 		for(int i=0; i<this.row_num; i++) {
 			for(int j=0; j<this.col_num; j++) {
 				System.out.println(this.board.getItem(i, j));
+				
 				if(this.board.getItem(i, j).equals("-") || this.board.getItem(i, j).equals(MaxValue) || this.board.getItem(i, j).equals(MinValue)) {
 					continue;
 				}else {
+					temp_result = Cal_Vval(i, j);
+					if(Math.abs(Double.parseDouble(this.board.getItem(i, j)) - temp_result) > 0.001) {
+						this.stable = false;
+					}
 					this.board.setItem(i, j, Cal_Vval(i, j));	
 				}
 			}
@@ -157,11 +166,15 @@ public class MDPmain {
 		
 	}
 	
+	public boolean getStable() {
+		return this.stable;
+	}
+	
 	public static void main(String[] args) {
 		
 		MDPmain mdp = new MDPmain();
 		
-		for(int i=0; i<20; i++) {
+		while(!mdp.getStable()) {
 			mdp.MDPiter();
 		}
 		
