@@ -171,7 +171,7 @@ public class MDPmain {
 		return this.stable;
 	}
 	
-	/*
+	
 	public static void main(String[] args) {
 		
 		MDPmain mdp = new MDPmain();
@@ -182,6 +182,6 @@ public class MDPmain {
 		
 		mdp.printDirection();
 		
-	}*/
+	}
 	
 }

@@ -62,7 +62,7 @@ public class mainPanel extends JFrame{
 		//this.panel_main = new JPanel(new BoxLayout(this.panel_main, BoxLayout.Y_AXIS));
 		
 		this.panel_information = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 10));
-		this.label_information = new JLabel("red:North| yellow:South| gray:West| green:East");
+		this.label_information = new JLabel("red:North| yellow:East| gray:South| green:West");
 		this.panel_information.add(label_information);
 		this.panel_main.add(this.panel_information);
 		
